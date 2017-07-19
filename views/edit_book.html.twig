@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Cal's Library</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Cal's Library</h1>
+            </div>
+
+            <h2>Update {{ book.getTitle }}</h2>
+
+            <form action="/books/{{ book.getId }}" method="post">
+                <input name="_method" type="hidden" value="patch">
+                <input name="book_id" type="hidden" value="{{ book.getId }}">
+
+                <input placeholder="Enter New Title" type="text" name="new_title" required>
+                <button type="submit" class="btn btn-success">Edit This Book</button>
+            </form>
+
+            <a href="/">Home</a>
+        </div>
+    </body>
+</html>
