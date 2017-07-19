@@ -7,7 +7,7 @@
 
     require_once 'src/Book.php';
 
-    $server = 'mysql:host=localhost:8889;dbname=library';
+    $server = 'mysql:host=localhost:8889;dbname=library_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -17,7 +17,7 @@
         function testGetTitle()
         {
             // Arrange
-            $title = 'Ender\'s Game';
+            $title = 'Enders Game';
             $test_book = new Book($title);
 
             // Act
@@ -30,7 +30,7 @@
         function testSetTitle()
         {
             // Arrange
-            $title = 'Ender\'s Game';
+            $title = 'Enders Game';
             $test_book = new Book($title);
 
             $new_title = 'Ready Player Three';
@@ -43,16 +43,33 @@
             $this->assertEquals($new_title, $result);
         }
 
-        // function testGetId()
-        // {
-        //
-        // }
-        //
-        // function testSave()
-        // {
-        //
-        // }
-        //
+        function testGetId()
+        {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+
+            // Act
+            $result = $test_book->getId();
+
+            // Assert
+            $this->assertTrue(is_numeric($result));
+        }
+
+        function testSave()
+        {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+
+            // Act
+            $executed = $test_book->save();
+
+            // Assert
+            $this->assertTrue($executed, "This book has not been saved to the library.");
+        }
+
         // function testGetAll()
         // {
         //
