@@ -69,7 +69,7 @@
             $new_last_name = "Stewart";
 
             //Act
-            $test_author->setFirstName($new_last_name);
+            $test_author->setLastName($new_last_name);
             $result = $test_author->getLastName();
 
             //Assert

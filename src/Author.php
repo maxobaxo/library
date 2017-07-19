@@ -15,27 +15,27 @@
 
         function getFirstName()
         {
-
+            return $this->first_name;
         }
 
-        function setFirstName()
+        function setFirstName($new_first_name)
         {
-
+            $this->first_name = (string) $new_first_name;
         }
 
         function getLastName()
         {
-
+            return $this->last_name;
         }
 
-        function setLastName()
+        function setLastName($new_last_name)
         {
-
+            $this->last_name = (string) $new_last_name;
         }
 
         function getFullName()
         {
-
+            return $this->full_name;
         }
 
         // function getId()
