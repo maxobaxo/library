@@ -15,11 +15,11 @@
             return $this->title;
         }
 
-        // function setTitle()
-        // {
-        //
-        // }
-        //
+        function setTitle($new_title)
+        {
+            $this->title = $new_title;
+        }
+
         // function getId()
         // {
         //

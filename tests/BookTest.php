@@ -27,11 +27,22 @@
             $this->assertEquals($title, $result);
         }
 
-        // function testSetTitle()
-        // {
-        //
-        // }
-        //
+        function testSetTitle()
+        {
+            // Arrange
+            $title = 'Ender\'s Game';
+            $test_book = new Book($title);
+
+            $new_title = 'Ready Player Three';
+
+            // Act
+            $test_book->setTitle($new_title);
+            $result = $test_book->getTitle();
+
+            // Assert
+            $this->assertEquals($new_title, $result);
+        }
+
         // function testGetId()
         // {
         //
