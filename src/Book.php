@@ -59,9 +59,20 @@
             }
         }
 
-        static function find()
+        static function find($search_id)
         {
-
+            $found_book = null;
+            $returned_books = $GLOBALS['DB']->prepare("SELECT * FROM books WHERE id = :id;");
+            $returned_books->bindParam(':id', $search_id, PDO::PARAM_STR);
+            $returned_books->execute();
+            foreach($returned_books as $book) {
+                $title = $book['title'];
+                $id = $book['id'];
+                if ($id = $search_id) {
+                    $found_book = new Book($title, $id);
+                }
+            }
+            return $found_book;
         }
 
         // function update()
