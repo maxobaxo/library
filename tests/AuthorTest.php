@@ -246,20 +246,18 @@
             //Arrange
             $first_name = "Max";
             $last_name = "Scher";
-            $id = null;
-            $test_author = new Author($first_name, $last_name, $id);
+            $test_author = new Author($first_name, $last_name);
             $test_author->save();
-            // var_dump($test_author);
+
             $title = "Sandman Slim";
-            $id= null;
-            $test_book = new Book($title, $id);
+            $test_book = new Book($title);
             $test_book->save();
-            // var_dump($test_book);
+
             //Act
             $test_author->addBook($test_book);
-
+            
             //Assert
-            $this->assertEquals($test_author->getBooks(), [$test_book]);
+            $this->assertEquals([$test_book], $test_author->getBooks());
 
         }
 
@@ -268,18 +266,15 @@
             //Arrange
             $first_name = "Max";
             $last_name = "Scher";
-            $id = null;
-            $test_author = new Author($first_name, $last_name, $id);
+            $test_author = new Author($first_name, $last_name);
             $test_author->save();
 
             $title = "Sandman Slim";
-            $id= null;
-            $test_book = new Book($title, $id);
+            $test_book = new Book($title);
             $test_book->save();
 
             $title2 = "Enders Game";
-            $id2 = null;
-            $test_book2 = new Book($title2, $id2);
+            $test_book2 = new Book($title2);
             $test_book2->save();
 
             //Act
@@ -287,7 +282,7 @@
             $test_author->addBook($test_book2);
 
             //Assert
-            $this->assertEquals($test_author->getBooks(), [$test_book, $test_book2]);
+            $this->assertEquals([$test_book, $test_book2], $test_author->getBooks());
         }
     }
 ?>

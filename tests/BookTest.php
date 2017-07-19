@@ -166,6 +166,50 @@
             // Assert
             $this->assertEquals([$test_book2], Book::getAll());
         }
+
+        function testAddAuthor()
+        {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            // Act
+            $test_book->addAuthor($test_author);
+
+            // Assert
+            $this->assertEquals([$test_author], $test_book->getAuthors());
+        }
+
+        function testGetAuthors()
+        {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $first_name2 = "Nathan";
+            $last_name2 = "Stewart";
+            $test_author2 = new Author($first_name2, $last_name2);
+            $test_author2->save();
+
+            // Act
+            $test_book->addAuthor($test_author);
+            $test_book->addAuthor($test_author2);
+
+            //Assert
+            $this->assertEquals([$test_author, $test_author2], $test_book->getAuthors());
+        }
     }
 
 ?>
