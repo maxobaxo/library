@@ -12,7 +12,7 @@
             <form action="/books" method="post">
                 <h3>Add a Book to Library Catalog</h3>
                 <input type="text" name="title" placeholder="Enter Title" required>
-                <button type="submit">Add Book</button>
+                <button type="submit" class="btn btn-success">Add Book</button>
             </form>
 
             {% if books is not empty %}
@@ -22,6 +22,10 @@
                         <li>{{ book.getTitle }}</li>
                     </ul>
                 {% endfor %}
+
+                <form action="/burn_books">
+                    <button type="submit" class="btn btn-danger">Burn All Books</button>
+                </form>
             {% else %}
                 <h3>Your Library has no books! WTF.</h3>
             {% endif %}

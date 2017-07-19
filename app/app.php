@@ -33,6 +33,11 @@
         return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
     });
 
+    $app->get('/burn_books', function() use ($app) {
+        Book::deleteAll();
+
+        return $app['twig']->render('books.html.twig', array('books.html.twig' => Book::getAll()));
+    });
 
     return $app;
 ?>
