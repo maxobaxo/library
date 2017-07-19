@@ -54,16 +54,30 @@
             }
         }
 
-        // function getAll()
-        // {
-        //
-        // }
-        //
-        // function deleteAll()
-        // {
-        //
-        // }
-        //
+        static function getAll()
+        {
+            $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors;");
+            $authors = array();
+            foreach ($returned_authors as $author) {
+                $first_name = $author['first_name'];
+                $last_name = $author['last_name'];
+                $id = $author['id'];
+                $new_author = new Author($first_name, $last_name, $id);
+                array_push($authors, $new_author);
+            }
+            return $authors;
+        }
+
+        static function deleteAll()
+        {
+            $executed = $GLOBALS['DB']->exec("DELETE FROM authors;");
+            if ($executed) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         // function find()
         // {
         //
