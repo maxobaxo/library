@@ -39,5 +39,11 @@
         return $app['twig']->render('books.html.twig', array('books.html.twig' => Book::getAll()));
     });
 
+    $app->get('/books/{id}', function($id) use ($app) {
+        $book = Book::find($id);
+
+        return $app['twig']->render('book.html.twig', array('book' => $book));
+    });
+
     return $app;
 ?>

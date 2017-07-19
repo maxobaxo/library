@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Cal's Library</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Cal's Library</h1>
+            </div>
+
+            <h2>{{ book.getTitle }}</h2>
+
+            <form action="/edit_book">
+                <button type="submit" class="btn btn-danger">Edit This Book</button>
+            </form>
+
+            <form action="/burn_book">
+                <button type="submit" class="btn btn-danger">Burn This Book</button>
+            </form>
+
+            <a href="/">Home</a>
+        </div>
+    </body>
+</html>

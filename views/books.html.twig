@@ -17,9 +17,10 @@
 
             {% if books is not empty %}
                 <h4>Find the entire library catalog below:</h4>
+                <p>Click title to edit/delete book</p>
                 {% for book in books %}
                     <ul>
-                        <li>{{ book.getTitle }}</li>
+                        <li> <a href="/books/{{ book.getId }}"> {{ book.getTitle }}</a></li>
                     </ul>
                 {% endfor %}
 
