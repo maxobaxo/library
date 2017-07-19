@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Cal's Library</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Cal's Library</h1>
+            </div>
+
+            <form action="/books" method="post">
+                <h3>Add a Book to Library Catalog</h3>
+                <input type="text" name="title" placeholder="Enter Title" required>
+                <button type="submit">Add Book</button>
+            </form>
+
+            {% if books is not empty %}
+                <h4>Find the entire library catalog below:</h4>
+                {% for book in books %}
+                    <ul>
+                        <li>{{ book.getTitle }}</li>
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <h3>Your Library has no books! WTF.</h3>
+            {% endif %}
+
+            <a href="/">Home</a>
+        </div>
+    </body>
+</html>
