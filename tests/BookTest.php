@@ -131,15 +131,26 @@
             $this->assertEquals($test_book2, $result);
         }
 
-        // function testUpdate()
-        // {
-        //
-        // }
-        //
-        // function testDelete()
-        // {
-        //
-        // }
+        function testUpdate()
+        {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $new_title = "Ready Player Three";
+
+            // Act
+            $test_book->update($new_title);
+
+            // Assert
+            $this->assertEquals($new_title, $test_book->getTitle());
+        }
+
+        function testDelete()
+        {
+
+        }
     }
 
 ?>

@@ -75,14 +75,20 @@
             return $found_book;
         }
 
-        // function update()
-        // {
-        //
-        // }
-        //
-        // function delete()
-        // {
-        //
-        // }
+        function update($new_title)
+        {
+            $executed = $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
+            if ($executed) {
+                $this->setTitle($new_title);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function delete()
+        {
+
+        }
     }
 ?>
