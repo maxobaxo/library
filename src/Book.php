@@ -12,47 +12,47 @@
 
         function getTitle()
         {
-
+            return $this->title;
         }
 
-        function setTitle()
-        {
-
-        }
-
-        function getId()
-        {
-
-        }
-
-        function save()
-        {
-
-        }
-
-        static function getAll()
-        {
-
-        }
-
-        static function deleteAll()
-        {
-
-        }
-
-        static function find()
-        {
-
-        }
-
-        function update()
-        {
-
-        }
-
-        function delete()
-        {
-            
-        }
+        // function setTitle()
+        // {
+        //
+        // }
+        //
+        // function getId()
+        // {
+        //
+        // }
+        //
+        // function save()
+        // {
+        //
+        // }
+        //
+        // static function getAll()
+        // {
+        //
+        // }
+        //
+        // static function deleteAll()
+        // {
+        //
+        // }
+        //
+        // static function find()
+        // {
+        //
+        // }
+        //
+        // function update()
+        // {
+        //
+        // }
+        //
+        // function delete()
+        // {
+        //
+        // }
     }
 ?>
