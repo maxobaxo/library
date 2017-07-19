@@ -59,5 +59,12 @@
         return $app['twig']->render('book.html.twig', array('book' => $book));
     });
 
+    $app->delete('/books/{id}', function($id) use($app) {
+        $book = Book::find($id);
+        $book->delete();
+
+        return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
+    });
+
     return $app;
 ?>
