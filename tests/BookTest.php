@@ -149,7 +149,20 @@
 
         function testDelete()
         {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
 
+            $title2 = 'Ready Player Three';
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+            // Act
+            $test_book->delete();
+
+            // Assert
+            $this->assertEquals([$test_book2], Book::getAll());
         }
     }
 
