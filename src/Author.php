@@ -78,19 +78,54 @@
             }
         }
 
-        // function find()
-        // {
-        //
-        // }
-        //
-        // function update()
-        // {
-        //
-        // }
-        //
-        // function delete()
-        // {
-        //
-        // }
+        static function find($search_id)
+        {
+            $found_author = null;
+            $returned_authors = $GLOBALS['DB']->prepare("SELECT * FROM authors WHERE id = :id;");
+            $returned_authors->bindParam(':id', $search_id, PDO::PARAM_STR);
+            $returned_authors->execute();
+            foreach ($returned_authors as $author) {
+                $first_name = $author['first_name'];
+                $last_name = $author['last_name'];
+                $id = $author['id'];
+                if ($id = $search_id) {
+                    $found_author = new Author($first_name, $last_name, $id);
+
+                }
+            }
+            return $found_author;
+        }
+
+        function updateFirstName($new_first_name)
+        {
+            $executed = $GLOBALS['DB']->exec("UPDATE authors SET first_name = '{$new_first_name}' WHERE id = {$this->getId()};");
+            if ($executed) {
+                $this->setFirstName($new_first_name);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function updateLastName($new_last_name)
+        {
+            $executed = $GLOBALS['DB']->exec("UPDATE authors SET last_name = '{$new_last_name}' WHERE id = {$this->getId()};");
+            if ($executed) {
+                $this->setLastName($new_last_name);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function delete()
+        {
+            $executed = $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
+            if ($executed) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 ?>

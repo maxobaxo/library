@@ -167,19 +167,78 @@
             $this->assertEquals([], $result);
         }
 
-        // function testFind()
-        // {
-        //
-        // }
-        //
-        // function testUpdate()
-        // {
-        //
-        // }
-        //
-        // function testDelete()
-        // {
-        //
-        // }
+        function testFind()
+        {
+            //Arrange
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $first_name2 = "Nathan";
+            $last_name2 = "Stewart";
+            $test_author2 = new Author($first_name2, $last_name2);
+            $test_author2->save();
+
+            //Act
+            $result = Author::find($test_author2->getId());
+
+            //Assert
+            $this->assertEquals($test_author2, $result);
+        }
+
+        function testUpdateFirstName()
+        {
+            //Arrange
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $new_first_name = "Nathan";
+
+            //Act
+            $test_author->updateFirstName($new_first_name);
+
+            //Assert
+            $this->assertEquals($new_first_name, $test_author->getFirstName());
+        }
+
+        function testUpdateLastName()
+        {
+            //Arrange
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $new_last_name = "Stewart";
+
+            //Act
+            $test_author->updateLastName($new_last_name);
+
+            //Assert
+            $this->assertEquals($new_last_name, $test_author->getLastName());
+        }
+
+        function testDelete()
+        {
+            //Arrange
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $first_name2 = "Nathan";
+            $last_name2 = "Stewart";
+            $test_author2 = new Author($first_name2, $last_name2);
+            $test_author2->save();
+
+            //Act
+            $test_author->delete();
+
+            //Assert
+            $this->assertEquals([$test_author2], Author::getAll());
+        }
     }
 ?>
