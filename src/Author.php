@@ -9,7 +9,7 @@
         {
             $this->first_name = $first_name;
             $this->last_name = $last_name;
-            $this->full_name = $first_name . $last_name;
+            $this->full_name = $first_name . " " . $last_name;
             $this->id = $id;
         }
 
@@ -126,6 +126,32 @@
             } else {
                 return false;
             }
+        }
+
+        function addBook($book)
+        {
+            $executed = $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$this->getId()}, {$book->getId()});");
+            if ($executed) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function getBooks()
+        {
+            $returned_books = $GLOBALS['DB']->query("SELECT books.* FROM authors
+                JOIN authors_books ON (authors_books.author_id = authors.id)
+                JOIN books ON (books.id = authors_books.book_id)
+                WHERE authors.id = {$this->getId()};");
+            $books = array();
+            foreach ($returned_books as $book) {
+                $title = $book['title'];
+                $id = $book['id'];
+                $new_book = new Book($title, $id);
+                array_push($books, $new_book);
+            }
+            return $books;
         }
     }
 ?>
