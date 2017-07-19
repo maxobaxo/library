@@ -90,16 +90,35 @@
             $this->assertEquals($full_name, $result);
         }
 
-        // function testGetId()
-        // {
-        //
-        // }
-        //
-        // function testSave()
-        // {
-        //
-        // }
-        //
+        function testGetId()
+        {
+            //Arrange
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            //Act
+            $result = $test_author->getId();
+
+            //Assert
+            $this->assertTrue(is_numeric($result));
+        }
+
+        function testSave()
+        {
+            //Arrange
+            $first_name = "Max";
+            $last_name = "Scher";
+            $test_author = new Author($first_name, $last_name);
+
+            //Act
+            $executed = $test_author->save();
+
+            //Assert
+            $this->assertTrue($executed, "This author is not saved.");
+        }
+
         // function testGetAll()
         // {
         //

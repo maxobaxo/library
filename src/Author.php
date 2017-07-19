@@ -38,16 +38,22 @@
             return $this->full_name;
         }
 
-        // function getId()
-        // {
-        //
-        // }
-        //
-        // function save()
-        // {
-        //
-        // }
-        //
+        function getId()
+        {
+            return $this->id;
+        }
+
+        function save()
+        {
+            $executed = $GLOBALS['DB']->exec("INSERT INTO authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");
+            if ($executed) {
+                $this->id = $GLOBALS['DB']->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         // function getAll()
         // {
         //
