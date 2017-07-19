@@ -36,21 +36,34 @@
             }
         }
 
-        // static function getAll()
-        // {
-        //
-        // }
-        //
-        // static function deleteAll()
-        // {
-        //
-        // }
-        //
-        // static function find()
-        // {
-        //
-        // }
-        //
+        static function getAll()
+        {
+            $returned_books = $GLOBALS['DB']->query("SELECT * FROM books;");
+            $books = array();
+            foreach ($returned_books as $book) {
+                $title = $book['title'];
+                $id = $book['id'];
+                $new_book = new Book($title, $id);
+                array_push($books, $new_book);
+            }
+            return $books;
+        }
+
+        static function deleteAll()
+        {
+            $executed = $GLOBALS['DB']->exec("DELETE FROM books;");
+            if ($executed) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        static function find()
+        {
+
+        }
+
         // function update()
         // {
         //

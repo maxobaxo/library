@@ -14,6 +14,11 @@
 
     class BookTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            Book::deleteAll();
+        }
+
         function testGetTitle()
         {
             // Arrange
@@ -70,21 +75,49 @@
             $this->assertTrue($executed, "This book has not been saved to the library.");
         }
 
-        // function testGetAll()
-        // {
-        //
-        // }
-        //
-        // function testDeleteAll()
-        // {
-        //
-        // }
-        //
-        // function testFind()
-        // {
-        //
-        // }
-        //
+        function testGetAll()
+        {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = 'Ready Player Three';
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+            // Act
+            $result = Book::getAll();
+
+            // Assert
+            $this->assertEquals([$test_book, $test_book2], $result);
+
+        }
+
+        function testDeleteAll()
+        {
+            // Arrange
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = 'Ready Player Three';
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+            // Act
+            Book::deleteAll();
+            $result = Book::getAll();
+
+            // Assert
+            $this->assertEquals([], $result);
+        }
+
+        function testFind()
+        {
+
+        }
+
         // function testUpdate()
         // {
         //
