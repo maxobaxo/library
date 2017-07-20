@@ -114,6 +114,20 @@
         return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
     });
 
+    $app->get('/search_results', function() use ($app) {
+        $all_books = Book::getAll();
+        $search = strtolower($_GET['title']);
+        $returned_books = array();
+        foreach($all_books as $book) {
+            if (strpos(strtolower($book->getTitle()), $search) !== false ) {
+                array_push ($returned_books, $book);
+            }
+        }
+        return $app['twig']->render('search_results.html.twig', array('books' => $returned_books));
+    });
+
+
+
 
     return $app;
 ?>

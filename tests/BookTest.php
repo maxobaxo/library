@@ -210,6 +210,7 @@
             //Assert
             $this->assertEquals([$test_author, $test_author2], $test_book->getAuthors());
         }
+
     }
 
 ?>

@@ -112,6 +112,7 @@
                 JOIN authors_books ON (authors_books.book_id = books.id)
                 JOIN authors ON (authors.id = authors_books.author_id)
                 WHERE books.id = {$this->getId()};");
+
             $authors = array();
             foreach ($returned_authors as $author) {
                 $first_name = $author['first_name'];
@@ -123,32 +124,5 @@
             return $authors;
         }
 
-        // function addAuthor($author)
-        // {
-        //     $executed = $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$author->getId()}, {$this->getId()});");
-        //     if ($executed) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // }
-        //
-        // function getAuthors()
-        // {
-        //     $returned_authors = $GLOBALS['DB']->query("SELECT authors.* FROM books
-        //         JOIN authors_books ON (authors_books.book_id = books.id)
-        //         JOIN authors ON (authors.id = authors_books.book_id)
-        //         WHERE books.id = {$this->getId()};");
-        //     $authors = array();
-        //     foreach ($returned_authors as $author) {
-        //         var_dump('I am DEEP inside the forEach loop for getAuthors');
-        //         $first_name = $author['first_name'];
-        //         $last_name = $author['last_name'];
-        //         $id = $author['id'];
-        //         $new_author = new Author($first_name, $last_name, $id);
-        //         array_push($authors, $new_author);
-        //     }
-        //     return $authors;
-        // }
     }
 ?>
