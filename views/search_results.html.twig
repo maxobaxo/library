@@ -25,7 +25,14 @@
 
                 <ul>
                     {% for book in books %}
-                        <li><h4>{{ book.getTitle }}</h4></li><br>
+                        <li><h4>
+                        {{ book.getTitle }} by
+                        <ul>
+                            {% for author in book.getAuthors %}
+                                <li>{{ author.getFullName }}</li>
+                            {% endfor %}
+                        </ul>
+                        </h4></li><br>
                     {% endfor %}
                 </ul>
             {% else %}

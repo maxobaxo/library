@@ -133,6 +133,7 @@
     $app->get('/search_results_title', function() use ($app) {
         $title_input = $_GET['title_input'];
         $books = Book::searchTitle($title_input);
+        
         return $app['twig']->render('search_results.html.twig', array('books' => $books, 'search' => $title_input));
     });
 
