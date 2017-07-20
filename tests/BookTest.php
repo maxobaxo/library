@@ -174,6 +174,11 @@
             $test_book = new Book($title);
             $test_book->save();
 
+            $title2 = 'Ready Player Three';
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+
             $first_name = "Max";
             $last_name = "Scher";
             $test_author = new Author($first_name, $last_name);
@@ -184,6 +189,43 @@
 
             // Assert
             $this->assertEquals([$test_author], $test_book->getAuthors());
+        }
+
+        function testRemoveAuthor()
+        {
+            // Arrange
+            $first_name = 'Ricky';
+            $last_name = 'Ricardo';
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $first_name2 = 'James';
+            $last_name2 = 'Dean';
+            $test_author2 = new Author($first_name2, $last_name2);
+            $test_author2->save();
+
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+            $test_book->addAuthor($test_author);
+
+            $title2 = 'Ready Player Three';
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+            $test_book2->addAuthor($test_author);
+            $test_book2->addAuthor($test_author2);
+
+            $title3 = 'Eat Pray Love';
+            $test_book3 = new Book($title3);
+            $test_book3->save();
+            $test_book3->addAuthor($test_author2);
+
+            // Act
+            $test_book2->removeAuthor($test_author2->getId());
+            $result = $test_book2->getAuthors();
+
+            // Assert
+            $this->assertEquals([$test_author], $result);
         }
 
         function testGetAuthors()

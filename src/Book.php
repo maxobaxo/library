@@ -106,6 +106,16 @@
             }
         }
 
+        function removeAuthor($author_id)
+        {
+            $executed = $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE book_id = {$this->getId()} AND author_id = {$author_id};");
+            if ($executed) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         function getAuthors()
         {
             $returned_authors = $GLOBALS['DB']->query("SELECT authors.* FROM books
