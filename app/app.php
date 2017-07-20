@@ -137,14 +137,9 @@
     });
 
     $app->get('/search_results_author', function() use ($app) {
-        $all_authors = Author::getAll();
-        $search = strtolower($_GET['author_input']);
-        foreach($all_authors as $author) {
-            if (strpos(strtolower($author->getFullName()), $search) !== false ) {
-                $returned_books = $author->getBooks();
-            }
-        }
-        return $app['twig']->render('search_results.html.twig', array('books' => $returned_books, 'search' => $search));
+        $author_input = $_GET['author_input'];
+        $books = Book::searchAuthor($author_input);
+        return $app['twig']->render('search_results.html.twig', array('books' => $books, 'search' => $author_input));
     });
 
     return $app;

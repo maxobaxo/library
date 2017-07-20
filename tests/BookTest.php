@@ -230,6 +230,43 @@
             // Assert
             $this->assertEquals([$test_book], $result);
         }
+
+        function testSearchAuthor()
+        {
+            // Arrange
+            $author_input = 'Ric';
+
+            $first_name = 'Ricky';
+            $last_name = 'Ricardo';
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $first_name2 = 'James';
+            $last_name2 = 'Dean';
+            $test_author2 = new Author($first_name2, $last_name2);
+            $test_author2->save();
+
+            $title = 'Enders Game';
+            $test_book = new Book($title);
+            $test_book->save();
+            $test_book->addAuthor($test_author);
+
+            $title2 = 'Ready Player Three';
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+            $test_book2->addAuthor($test_author2);
+
+            $title3 = 'Eat Pray Love';
+            $test_book3 = new Book($title3);
+            $test_book3->save();
+            $test_book3->addAuthor($test_author2);
+
+            // Act
+            $result = Book::searchAuthor($author_input);
+
+            // Assert
+            $this->assertEquals([$test_book], $result);
+        }
     }
 
 ?>

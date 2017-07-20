@@ -139,5 +139,27 @@
             }
             return $books;
         }
+
+        static function searchAuthor($author_input)
+        {
+            $author_input = strtolower($author_input);
+            $books = array();
+            $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors;");
+            foreach($returned_authors as $author) {
+                $first_name = $author['first_name'];
+                $last_name = $author['last_name'];
+                $id = $author['id'];
+                $new_author = new Author($first_name, $last_name, $id);
+
+                if (strpos(strtolower($new_author->getFullName()), $author_input) !== false) {
+
+                    $loop_books = $new_author->getBooks();
+                    foreach($loop_books as $book) {
+                        array_push($books, $book);
+                    }
+                }
+            }
+            return $books;
+        }
     }
 ?>
