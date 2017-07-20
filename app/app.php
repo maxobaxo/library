@@ -42,7 +42,7 @@
     $app->get('/books/{id}', function($id) use ($app) {
         $book = Book::find($id);
 
-        return $app['twig']->render('book.html.twig', array('book' => $book));
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'all_authors' => Author::getAll()));
     });
 
     $app->get('/books/{id}/edit', function($id) use ($app) {
@@ -79,10 +79,26 @@
         return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
     });
 
+    $app->post('/add_books', function() use ($app) {
+        $book = Book::find($_POST['book_id']);
+        $author = Author::find($_POST['author_id']);
+        $author->addBook($book);
+
+        return $app['twig']->render('author.html.twig', array('author' => $author, 'books' => $author->getBooks(), 'book' => $book, 'all_books' => Book::getAll()));
+    });
+
+    $app->post("/add_authors", function() use ($app) {
+        $author = Author::find($_POST['author_id']);
+        $book = Book::find($_POST['book_id']);
+        $book->addAuthor($author);
+
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'books' => Book::getAll(), 'authors' => $book->getAuthors(), 'author' => $author, 'all_authors' => Author::getAll()));
+    });
+
     $app->get('/authors/{id}', function($id) use ($app) {
         $author = Author::find($id);
 
-        return $app['twig']->render('author.html.twig', array('author' => $author));
+        return $app['twig']->render('author.html.twig', array('author' => $author, 'all_books' => Book::getAll()));
     });
 
     $app->get('/authors/{id}/edit', function($id) use ($app) {
@@ -114,7 +130,7 @@
         return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
     });
 
-    $app->get('/search_results', function() use ($app) {
+    $app->get('/search_results_title', function() use ($app) {
         $all_books = Book::getAll();
         $search = strtolower($_GET['title']);
         $returned_books = array();
@@ -126,8 +142,16 @@
         return $app['twig']->render('search_results.html.twig', array('books' => $returned_books));
     });
 
-
-
+    $app->get('/search_results_author', function() use ($app) {
+        $all_authors = Author::getAll();
+        $search = strtolower($_GET['author']);
+        foreach($all_authors as $author) {
+            if (strpos(strtolower($author->getFullName()), $search) !== false ) {
+                $returned_books = $author->getBooks();
+            }
+        }
+        return $app['twig']->render('search_results.html.twig', array('books' => $returned_books));
+    });
 
     return $app;
 ?>

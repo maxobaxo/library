@@ -11,6 +11,16 @@
 
             <h2>{{ author.getFullName }}</h2>
 
+            {% if books is not empty %}
+                <p>Here are the books for this author:</p>
+                <ul>
+                    {% for book in books %}
+                        <li>{{ book.getTitle }}</li>
+                        </br>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
             <form action="/authors/{{ author.getId }}/edit">
                 <button type="submit" class="btn btn-success">Edit This Author</button>
             </form>
@@ -19,6 +29,18 @@
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">Murder This Author</button>
             </form>
+
+            <form action='/add_books' method='post'>
+                <input id="author_id" name="author_id" type="hidden" value="{{ author.getId }}">
+                <label for="book_id">Select a book</label>
+                <select id='book_id' name='book_id' type='text'>
+                  {% for book in all_books %}
+                    <option value="{{ book.getId }}"> {{ book.getTitle }} </option>
+                  {% endfor %}
+                </select>
+                <button type='submit'>Add Book</button>
+            </form>
+
 
             <a href="/">Home</a>
         </div>
