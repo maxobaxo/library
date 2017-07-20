@@ -9,19 +9,20 @@
                 <h1>Cal's Library</h1>
             </div>
 
-            <h3>Search for another book by...</h3>
-            <form  action="/search_results">
-                <input placeholder="Title" type="text" name="title" required>
+            <h3>Search for another book</h3>
+            <form  action="/search_results_title">
+                <input placeholder="Title" type="text" name="title_input" required>
                 <button type="submit" class="btn">Search</button>
             </form>
 
-            <form  action="/search_results">
-                <input placeholder="Author" type="text" name="title" required>
+            <form  action="/search_results_author">
+                <input placeholder="Author" type="text" name="author_input" required>
                 <button type="submit" class="btn">Search</button>
             </form>
 
             {% if books is not empty %}
-                <h3>Search Results:</h3>
+                <h3>Search Results for: '{{ search }}'</h3>
+
                 <ul>
                     {% for book in books %}
                         <li><h4>{{ book.getTitle }}</h4></li><br>

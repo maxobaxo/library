@@ -131,26 +131,20 @@
     });
 
     $app->get('/search_results_title', function() use ($app) {
-        $all_books = Book::getAll();
-        $search = strtolower($_GET['title']);
-        $returned_books = array();
-        foreach($all_books as $book) {
-            if (strpos(strtolower($book->getTitle()), $search) !== false ) {
-                array_push ($returned_books, $book);
-            }
-        }
-        return $app['twig']->render('search_results.html.twig', array('books' => $returned_books));
+        $title_input = $_GET['title_input'];
+        $books = Book::searchTitle($title_input);
+        return $app['twig']->render('search_results.html.twig', array('books' => $books, 'search' => $title_input));
     });
 
     $app->get('/search_results_author', function() use ($app) {
         $all_authors = Author::getAll();
-        $search = strtolower($_GET['author']);
+        $search = strtolower($_GET['author_input']);
         foreach($all_authors as $author) {
             if (strpos(strtolower($author->getFullName()), $search) !== false ) {
                 $returned_books = $author->getBooks();
             }
         }
-        return $app['twig']->render('search_results.html.twig', array('books' => $returned_books));
+        return $app['twig']->render('search_results.html.twig', array('books' => $returned_books, 'search' => $search));
     });
 
     return $app;

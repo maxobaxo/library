@@ -211,6 +211,25 @@
             $this->assertEquals([$test_author, $test_author2], $test_book->getAuthors());
         }
 
+        function testSearchTitle()
+        {
+            // Arrange
+            $title_input = 'input';
+
+            $title = 'Inputs 101';
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = 'GitHub Forking';
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+            // Act
+            $result = Book::searchTitle($title_input);
+
+            // Assert
+            $this->assertEquals([$test_book], $result);
+        }
     }
 
 ?>

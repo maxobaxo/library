@@ -124,5 +124,20 @@
             return $authors;
         }
 
+        static function searchTitle($title_input)
+        {
+            $title_input = strtolower($title_input);
+            $books = array();
+            $returned_books = $GLOBALS['DB']->query("SELECT * FROM books;");
+            foreach ($returned_books as $book) {
+                $title = $book['title'];
+                $id = $book['id'];
+                $new_book = new Book($title, $id);
+                if (strpos(strtolower($new_book->getTitle()), $title_input) !== false ) {
+                    array_push($books, $new_book);
+                }
+            }
+            return $books;
+        }
     }
 ?>
