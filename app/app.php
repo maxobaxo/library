@@ -48,7 +48,7 @@
     $app->get('/books/{id}/edit', function($id) use ($app) {
         $book = Book::find($id);
 
-        return $app['twig']->render('edit_book.html.twig', array('book' => $book));
+        return $app['twig']->render('edit_book.html.twig', array('authors' => $book->getAuthors(), 'book' => $book));
     });
 
     $app->patch('/books/{id}', function($id) use ($app) {
@@ -130,10 +130,18 @@
         return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
     });
 
+    $app->delete('/authors/{id}/delete', function($id) use ($app) {
+        $author = Author::find($id);
+        $book_id = $_POST['book_id'];
+        $book = Book::find($book_id);
+        $book->removeAuthor($id);
+        return $app['twig']->render('edit_book.html.twig', array('book' => $book, 'authors' => $book->getAuthors()));
+    });
+
     $app->get('/search_results_title', function() use ($app) {
         $title_input = $_GET['title_input'];
         $books = Book::searchTitle($title_input);
-        
+
         return $app['twig']->render('search_results.html.twig', array('books' => $books, 'search' => $title_input));
     });
 
