@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Cal's Library</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Cal's Library</h1>
+            </div>
+
+            <h2>{{ author.getFullName }}</h2>
+
+            <form action="/authors/{{ author.getId }}/edit">
+                <button type="submit" class="btn btn-success">Edit This Author</button>
+            </form>
+
+            <form action="/authors/{{ author.getId }}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger">Murder This Author</button>
+            </form>
+
+            <a href="/">Home</a>
+        </div>
+    </body>
+</html>
