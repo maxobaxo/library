@@ -42,7 +42,7 @@
     $app->get('/books/{id}', function($id) use ($app) {
         $book = Book::find($id);
 
-        return $app['twig']->render('book.html.twig', array('book' => $book, 'all_authors' => Author::getAll()));
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'all_authors' => Author::getAll()));
     });
 
     $app->get('/books/{id}/edit', function($id) use ($app) {
@@ -98,7 +98,7 @@
     $app->get('/authors/{id}', function($id) use ($app) {
         $author = Author::find($id);
 
-        return $app['twig']->render('author.html.twig', array('author' => $author, 'all_books' => Book::getAll()));
+        return $app['twig']->render('author.html.twig', array('author' => $author, 'books' => $author->getBooks(), 'all_books' => Book::getAll()));
     });
 
     $app->get('/authors/{id}/edit', function($id) use ($app) {
