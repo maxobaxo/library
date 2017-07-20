@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Cal's Library</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Cal's Library</h1>
+            </div>
+
+            <form action="/authors" method="post">
+                <h3>Add an Author to Library Catalog</h3>
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="last_name" placeholder="Last Name" required>
+                <button type="submit" class="btn btn-success">Add Author</button>
+            </form>
+
+            {% if authors is not empty %}
+                <h4>Find a list below of all authors represented in the library:</h4>
+                <p>Click title to edit/delete author</p>
+                {% for author in authors %}
+                    <ul>
+                        <li> <a href="/authors/{{ author.getId }}"> {{ author.getFullName }}</a></li>
+                    </ul>
+                {% endfor %}
+
+                <form action="/murder_authors">
+                    <button type="submit" class="btn btn-danger">Murder All Authors</button>
+                </form>
+            {% else %}
+                <h3>Your Library has no authors! WTF.</h3>
+            {% endif %}
+
+            <a href="/">Home</a>
+        </div>
+    </body>
+</html>

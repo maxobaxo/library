@@ -66,5 +66,18 @@
         return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
     });
 
+    $app->get('/authors', function() use ($app) {
+        return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
+    });
+
+    $app->post('/authors', function() use ($app) {
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $new_author = new Author($first_name, $last_name);
+        $new_author->save();
+
+        return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
+    });
+
     return $app;
 ?>
